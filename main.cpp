@@ -6,7 +6,7 @@
 int main()
 {
     Game startState("3 4 2 5 1 7 6 0 8"); // inv = 7
-    Game finalState("1 2 3 8 1 4 7 6 5"); // inv = 7
+    Game finalState("1 2 3 8 0 4 7 6 5"); // inv = 7
 
     // Check for solvability before doing anything else
     if (startState.GetInversionPolarity() != finalState.GetInversionPolarity())
