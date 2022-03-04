@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-#define WIDTH 3
+#define WIDTH 2
 
 class Game
 {

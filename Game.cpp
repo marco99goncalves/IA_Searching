@@ -3,11 +3,11 @@
 #include <algorithm>
 #include "Game.h"
 
-#define WIDTH 3
+#define WIDTH 2
 
 int mat[WIDTH][WIDTH];
 
-//Creates a new game
+// Creates a new game
 Game::Game(std::string game)
 {
     int num = 0;
@@ -35,6 +35,7 @@ void Game::PrintGame()
 
         std::cout << "\n";
     }
+    std::cout << "--\n";
 }
 
 // Codigo horrivel, mas é meio irrelevante portanto podemos ignorar por agora.
@@ -61,7 +62,6 @@ int Game::GetInversionPolarity()
                 inversions++;
         }
     }
-
     return inversions % 2;
 }
 
