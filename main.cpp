@@ -16,20 +16,18 @@ int main()
     Node n5("5 5 5 5");
 
     Tree t(&n);
-    std::cout << "here\n";
-    n.InsertChild(&n2);
-    n.InsertChild(&n3);
-    n.InsertChild(&n4);
-
     n2.InsertChild(&n1);
     n2.InsertChild(&n0);
 
     n4.InsertChild(&n5);
 
-    std::cout << "psdf\n";
-    n5.game->PrintGame();
+    std::cout << "n2: " << &n2 << "\n";
+    n.InsertChild(&n2);
+    std::cout << "n2: " << &n2 << "\n ";
+    n.InsertChild(&n3);
+    n.InsertChild(&n4);
+    std::cout << "ola: " << n.children.capacity() << "\n";
 
     t.PrintDFS();
-
     return 0;
 }
