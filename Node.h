@@ -1,15 +1,14 @@
 #pragma once
-#include <iostream>
+#include <bits/stdc++.h>
 #include "Game.h"
-#include <vector>
+using namespace std;
 
 class Node
 {
 public:
     Game *game;
-    std::vector<Node> children;
-    Node(Game *g);
-    Node(std::string game);
+    vector<Node> children;
+    Node();
     void SetChildren(int index, Node *child);
     void InsertChild(Node *child);
     void DFS();

@@ -1,25 +1,22 @@
-
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 #include "Game.h"
+using namespace std;
 
-#define WIDTH 2
-
-int mat[WIDTH][WIDTH];
+vector<vector<int>> mat;
+pair<int, int> blankPosition;
 
 // Creates a new game
-Game::Game(std::string game)
+Game::Game()
 {
-    int num = 0;
-    int bytesConsumedNow = 0, bytesConsumedTotal = 0;
-
+    mat.resize(WIDTH);
     for (int row = 0; row < WIDTH; row++)
     {
+        mat[row].resize(WIDTH);
         for (int col = 0; col < WIDTH; col++)
         {
-            sscanf(game.c_str() + bytesConsumedTotal, "%d%n", &num, &bytesConsumedNow);
-            bytesConsumedTotal += bytesConsumedNow;
-            mat[row][col] = num;
+            cin >> mat[row][col];
+            if (mat[row][col] == 0)
+                blankPosition = make_pair(row, col);
         }
     }
 }
@@ -30,12 +27,12 @@ void Game::PrintGame()
     {
         for (int col = 0; col < WIDTH; col++)
         {
-            std::cout << mat[row][col] << " ";
+            cout << mat[row][col] << " ";
         }
 
-        std::cout << "\n";
+        cout << "\n";
     }
-    std::cout << "--\n";
+    cout << "--\n";
 }
 
 // Codigo horrivel, mas é meio irrelevante portanto podemos ignorar por agora.

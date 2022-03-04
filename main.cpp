@@ -1,13 +1,20 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include "Game.h"
 #include "Node.h"
 #include "Tree.h"
-
+using namespace std;
 // g++ -Wall -o main main.cpp && ./main
+
+
+
 
 int main()
 {
-    Node n("3 1 2 0");
+    Game initial;
+    Game final;
+
+
+    /* Node n("3 1 2 0");
     Node n0("0 0 0 0");
     Node n1("1 1 1 1");
     Node n2("2 2 2 2");
@@ -28,6 +35,6 @@ int main()
     n.InsertChild(&n4);
     std::cout << "ola: " << n.children.capacity() << "\n";
 
-    t.PrintDFS();
+    t.PrintDFS(); */
     return 0;
 }

@@ -1,20 +1,14 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include "Game.h"
 #include "Node.h"
-#include <vector>
-#include <iterator>
+using namespace std;
 
 Game *game;
-std::vector<Node *> children;
+vector<Node *> children;
 
-Node::Node(Game *g)
+Node::Node()
 {
-    game = g;
-}
-
-Node::Node(std::string game)
-{
-    Game *g = new Game(game);
+    Game *g = new Game();
     this->game = g;
 }
 
@@ -27,7 +21,7 @@ void Node::SetChildren(int index, Node *child)
 void Node::InsertChild(Node *child)
 {
     children.push_back(*child);
-    std::cout << &children.back() << "\n";
+    cout << &children.back() << "\n";
 }
 
 void Node::DFS()

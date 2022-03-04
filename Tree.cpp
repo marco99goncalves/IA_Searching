@@ -1,6 +1,7 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include "Tree.h"
 #include "Node.h"
+using namespace std;
 
 Node *root;
 Tree::Tree(Node *root)

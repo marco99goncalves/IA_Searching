@@ -1,6 +1,7 @@
 #pragma once
-#include <iostream>
+#include <bits/stdc++.h>
 #include "Node.h"
+using namespace std;
 
 class Tree
 {
