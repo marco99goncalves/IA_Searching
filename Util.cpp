@@ -2,13 +2,13 @@
 #include "Util.h"
 using namespace std;
 
-int manhattan_distance(pair<int, int> &point1, pair<int, int> &point2)
+int Util::manhattan_distance(pair<int, int> &point1, pair<int, int> &point2)
 {
     return abs(point1.first - point2.first + point1.second - point2.second);
 }
 
 // Converts a matrix into an array.
-void convert_to_array(vector<vector<int>> &inMatrix, vector<int> &outArray)
+void Util::convert_to_array(vector<vector<int>> &inMatrix, vector<int> &outArray)
 {
     int pos = 0;
     for (int row = 0; row < WIDTH; row++)
@@ -20,7 +20,7 @@ void convert_to_array(vector<vector<int>> &inMatrix, vector<int> &outArray)
     }
 }
 
-int count_transpositions(Game &initialState, Game &finalState)
+int Util::count_transpositions(Game &initialState, Game &finalState)
 { // isto corre em n^2 (talvez dê para fazer melhor..)
     // a lógica é contar o número de swaps que têm de ser feitos (temos de pensar porque é que isto funciona (se funcionar))
     vector<int> configuration1(WIDTH * WIDTH);
@@ -45,10 +45,10 @@ int count_transpositions(Game &initialState, Game &finalState)
     return transpositions;
 }
 
-bool check_solvability(Game &initialState, Game &finalState)
+bool Util::check_solvability(Game &initialState, Game &finalState)
 {
     int manDist = manhattan_distance(initialState.blankPosition, finalState.blankPosition);
-    int trans = 0;
+    int trans = count_transpositions(initialState, finalState);
 
     return (manDist + trans) % 2 == 0;
 }

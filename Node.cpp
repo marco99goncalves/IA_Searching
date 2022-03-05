@@ -13,14 +13,14 @@ Node::Node()
 }
 
 // TODO: Delete this shit
-void Node::SetChildren(int index, Node *child)
+void Node::SetChildren(int index, Node &child)
 {
-    children.at(index) = (*child);
+    children.at(index) = child;
 }
 
-void Node::InsertChild(Node *child)
+void Node::InsertChild(Node &child)
 {
-    children.push_back(*child);
+    children.push_back(child);
     cout << &children.back() << "\n";
 }
 

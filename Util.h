@@ -4,9 +4,8 @@
 
 using namespace std;
 
-class Util
+namespace Util
 {
-public:
     // Calculates the manhattan distance between two points
     int manhattan_distance(pair<int, int> &point1, pair<int, int> &point2);
 
@@ -17,4 +16,4 @@ public:
     bool check_solvability(Game &initialState, Game &finalState);
 
     int count_transpositions(Game &initialState, Game &finalState);
-};
+}

@@ -2,19 +2,19 @@
 #include "Game.h"
 #include "Node.h"
 #include "Tree.h"
+#include "Util.h"
 using namespace std;
 // g++ -Wall -o main main.cpp && ./main
-
-
-
 
 int main()
 {
     Game initial;
     Game final;
 
+    cout << (Util::check_solvability(initial, final) ? "Possivel" : "Impossivel :(")
+         << "\n";
 
-    /* Node n("3 1 2 0");
+        /* Node n("3 1 2 0");
     Node n0("0 0 0 0");
     Node n1("1 1 1 1");
     Node n2("2 2 2 2");

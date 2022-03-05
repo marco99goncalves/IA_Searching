@@ -9,7 +9,7 @@ public:
     Game *game;
     vector<Node> children;
     Node();
-    void SetChildren(int index, Node *child);
-    void InsertChild(Node *child);
+    void SetChildren(int index, Node &child);
+    void InsertChild(Node &child);
     void DFS();
 };
