@@ -11,6 +11,5 @@ public:
     pair<int, int> blankPosition;
     Game(); // Takes input from the standard input ONLY
     void PrintGame();
-    int GetInversionPolarity();
     bool operator==(Game *rhs);
 };

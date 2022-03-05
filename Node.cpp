@@ -5,17 +5,13 @@ using namespace std;
 
 Game *game;
 vector<Node *> children;
+Node *parent;
 
 Node::Node()
 {
+    children.resize(WIDTH);
     Game *g = new Game();
     this->game = g;
-}
-
-// TODO: Delete this shit
-void Node::SetChildren(int index, Node &child)
-{
-    children.at(index) = child;
 }
 
 void Node::InsertChild(Node &child)
