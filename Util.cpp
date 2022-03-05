@@ -4,7 +4,7 @@ using namespace std;
 
 int Util::manhattan_distance(pair<int, int> &point1, pair<int, int> &point2)
 {
-    return abs(point1.first - point2.first) + abs(point1.second - point2.second);
+    return abs(point1.first - point2.first + point1.second - point2.second);
 }
 
 // Converts a matrix into an array.

@@ -5,24 +5,18 @@ using namespace std;
 
 Game *game;
 vector<Node *> children;
-int depth; // podemos ter estava variável para guardar o depth do no atual
+int depth;
 
 Node::Node()
 {
+    children.resize(WIDTH);
     Game *g = new Game();
     this->game = g;
 }
 
-// TODO: Delete this shit
-void Node::SetChildren(int index, Node *child)
+void Node::InsertChild(Node &child)
 {
-    children.at(index) = (*child);
-}
-
-void Node::InsertChild(Node *child)
-{
-    children.push_back(*child);
-    cout << &children.back() << '\n';
+    children.push_back(child);
 }
 
 void Node::DFS()

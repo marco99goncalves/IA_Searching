@@ -8,8 +8,8 @@ class Node
 public:
     Game *game;
     vector<Node> children;
+    int depth;
     Node();
-    void SetChildren(int index, Node *child);
-    void InsertChild(Node *child);
+    void InsertChild(Node &child);
     void DFS();
 };
