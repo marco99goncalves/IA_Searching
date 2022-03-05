@@ -27,10 +27,10 @@ void Game::PrintGame()
     {
         for (int col = 0; col < WIDTH; col++)
         {
-            cout << mat[row][col] << " ";
+            cout << mat[row][col] << ' ';
         }
 
-        cout << "\n";
+        cout << '\n';
     }
     cout << "--\n";
 }
