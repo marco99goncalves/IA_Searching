@@ -5,6 +5,7 @@ using namespace std;
 
 Game *game;
 vector<Node *> children;
+int depth; // podemos ter estava variável para guardar o depth do no atual
 
 Node::Node()
 {
@@ -21,7 +22,7 @@ void Node::SetChildren(int index, Node *child)
 void Node::InsertChild(Node *child)
 {
     children.push_back(*child);
-    cout << &children.back() << "\n";
+    cout << &children.back() << '\n';
 }
 
 void Node::DFS()
