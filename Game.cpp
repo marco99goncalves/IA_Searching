@@ -2,16 +2,14 @@
 #include "Game.h"
 using namespace std;
 
-vector<vector<int>> mat;
+vector<vector<int>> mat(WIDTH, vector<int>(WIDTH));
 pair<int, int> blankPosition;
 
 // Creates a new game
 Game::Game()
 {
-    mat.resize(WIDTH);
     for (int row = 0; row < WIDTH; row++)
     {
-        mat[row].resize(WIDTH);
         for (int col = 0; col < WIDTH; col++)
         {
             cin >> mat[row][col];

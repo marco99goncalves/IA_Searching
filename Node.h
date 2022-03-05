@@ -6,10 +6,8 @@ using namespace std;
 class Node
 {
 public:
-    Game *game;
-    vector<Node> children;
-    int depth;
+    extern Game *game;
     Node();
-    void InsertChild(Node &child);
+    void InsertChild(Node *child);
     void DFS();
 };

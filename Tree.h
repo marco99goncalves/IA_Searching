@@ -6,7 +6,7 @@ using namespace std;
 class Tree
 {
 public:
-    Node *root;
+    extern Node *root;
     Tree(Node *r);
     void PrintDFS();
 };

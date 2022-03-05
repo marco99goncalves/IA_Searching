@@ -4,17 +4,16 @@
 using namespace std;
 
 Game *game;
-vector<Node *> children;
+vector<Node *> children(4);
 int depth;
 
 Node::Node()
 {
-    children.resize(WIDTH);
     Game *g = new Game();
     this->game = g;
 }
 
-void Node::InsertChild(Node &child)
+void Node::InsertChild(Node *child)
 {
     children.push_back(child);
 }
@@ -24,6 +23,6 @@ void Node::DFS()
     (*game).PrintGame();
     for (int i = 0; i < children.size(); i++)
     {
-        children.at(i).DFS();
+        children.at(i)->DFS();
     }
 }
