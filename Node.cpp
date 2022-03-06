@@ -4,7 +4,7 @@
 using namespace std;
 
 Game *game;
-vector<Node *> children(4);
+vector<Node *> children;
 int depth;
 
 Node::Node()

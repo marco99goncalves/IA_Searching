@@ -2,13 +2,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define WIDTH 2
+#define WIDTH 4
 
 class Game
 {
 public:
-    extern vector<vector<int>> mat;
-    extern pair<int, int> blankPosition;
+    vector<vector<int>> mat;
+    pair<int, int> blankPosition;
     Game(); // Takes input from the standard input ONLY
     void PrintGame();
     int GetInversionPolarity();

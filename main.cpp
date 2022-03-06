@@ -11,9 +11,11 @@ int main()
     Node n0;
     Node n1;
     Node n2;
-    n0.game->PrintGame();
-    n1.game->PrintGame();
-    n2.game->PrintGame();
+    Tree t(&n0);
+    n0.InsertChild(&n1);
+    n0.InsertChild(&n2);
+
+    t.PrintDFS();
 
     return 0;
 }
