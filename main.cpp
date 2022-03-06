@@ -8,14 +8,14 @@ using namespace std;
 
 int main()
 {
-    Node n0;
-    Node n1;
-    Node n2;
-    Tree t(&n0);
-    n0.InsertChild(&n1);
-    n0.InsertChild(&n2);
+    Game initialState;
+    Game finalState;
+    if (!Util::check_solvability(initialState, finalState))
+        return -1;
 
-    t.PrintDFS();
+    Node root(&initialState, 0);
+    Tree tree(&root);
+    tree.PrintDFS();
 
     return 0;
 }

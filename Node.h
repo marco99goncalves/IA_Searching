@@ -10,6 +10,8 @@ public:
     int depth;
     vector<Node *> children;
     Node();
+    Node(Game *game, int depth);
     void InsertChild(Node *child);
+    void CreateChildren();
     void DFS();
 };

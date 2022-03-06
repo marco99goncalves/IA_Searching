@@ -4,6 +4,7 @@ using namespace std;
 
 vector<vector<int>> mat(WIDTH, vector<int>(WIDTH));
 pair<int, int> blankPosition;
+vector<pair<int, int>> directions = {make_pair(-1, 0), make_pair(1, 0), make_pair(0, 1), make_pair(0, -1)};
 
 // Creates a new game
 Game::Game()
@@ -21,13 +22,43 @@ Game::Game()
     }
 }
 
+Game::Game(vector<vector<int>> &mat, pair<int, int> &blankPosition)
+{
+    this->mat = mat;
+    this->blankPosition = blankPosition;
+}
+
+void Game::CreateChildren(vector<Game *> &outGames)
+{
+    for (auto x : directions)
+    {
+        if (x.first + blankPosition.first > 3 || x.first + blankPosition.first < 0)
+            continue;
+        if (x.second + blankPosition.second > 3 || x.second + blankPosition.second < 0)
+            continue;
+
+        vector<vector<int>> matTemp = mat;
+        swap(matTemp[x.first + blankPosition.first][x.second + blankPosition.second], matTemp[blankPosition.first][blankPosition.second]);
+
+        pair<int, int> idk = make_pair(x.first + blankPosition.first, x.second + blankPosition.second);
+        outGames.push_back(new Game(matTemp, idk));
+    }
+}
+
 void Game::PrintGame()
 {
     for (int row = 0; row < WIDTH; row++)
     {
         for (int col = 0; col < WIDTH; col++)
         {
-            cout << mat[row][col] << ' ';
+            if (mat[row][col] < 10)
+            {
+                cout << ' ' << mat[row][col] << ' ';
+            }
+            else
+            {
+                cout << mat[row][col] << ' ';
+            }
         }
 
         cout << '\n';
