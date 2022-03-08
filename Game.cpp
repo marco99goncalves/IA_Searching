@@ -4,6 +4,7 @@
 using namespace std;
 
 vector<vector<int>> mat(WIDTH, vector<int>(WIDTH));
+static vector<pair<int, int>> directions = {make_pair(-1, 0), make_pair(1, 0), make_pair(0, 1), make_pair(0, -1)};
 
 pair<int, int> blankPosition;
 int depth;
@@ -38,7 +39,6 @@ Game::Game(vector<vector<int>> &mat, pair<int, int> &blankPosition, string &path
 
 void Game::CreateChildren(vector<Game *> &outGames)
 {
-    vector<pair<int, int>> directions = {make_pair(-1, 0), make_pair(1, 0), make_pair(0, 1), make_pair(0, -1)};
 
     for (auto x : directions)
     {

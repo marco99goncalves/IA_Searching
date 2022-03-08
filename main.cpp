@@ -11,12 +11,7 @@ unordered_set<string> visited;
 
 bool is_visited(string &path)
 {
-    if (visited.find(path) == visited.end())
-    {
-        visited.insert(path);
-        return false;
-    }
-    return true;
+    return !(visited.insert(path).second);
 }
 
 // Implementaçao de BFS iterativa
@@ -35,7 +30,6 @@ void BFS()
         count++;
         Game *currentGame = iterativeQueue.front();
         iterativeQueue.pop();
-
         vector<Game *> games;
         currentGame->CreateChildren(games);
         for (Game *child : games)
@@ -47,7 +41,7 @@ void BFS()
                 cout << "Caminho encontrado\n";
                 child->path += final.path;
                 Util::print_path(child->path, child->depth);
-                cout << "Depth: " << currentGame->depth << '\n';
+                cout << "Depth: " << child->depth << '\n';
                 cout << "Explored: " << count << " configurations\n";
                 return;
             }
@@ -75,6 +69,13 @@ void DFS()
 
         vector<Game *> games;
         currentGame->CreateChildren(games);
+
+        if (currentGame->depth > 0)
+        {
+            currentGame->mat.clear();
+            delete currentGame;
+        }
+
         for (Game *child : games)
         {
             string curString = "";
@@ -84,7 +85,7 @@ void DFS()
                 cout << "Caminho encontrado\n";
                 child->path += final.path;
                 Util::print_path(child->path, child->depth);
-                cout << "Depth: " << currentGame->depth << '\n';
+                cout << "Depth: " << child->depth << '\n';
                 cout << "Explored: " << count << " configurations\n";
                 return;
             }
@@ -92,9 +93,7 @@ void DFS()
             if (!is_visited(curString))
                 iterativeStack.push(child);
         }
-
-        if (currentGame->depth > 0)
-            delete currentGame;
+        visited.erase(currentGame->path);
     }
 }
 
