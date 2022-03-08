@@ -1,17 +1,11 @@
-output: main.o Game.o Node.o Tree.o Util.o
-	g++ Game.o main.o Node.o Tree.o Util.o -o out
+output: main.o Game.o Util.o
+	g++ Game.o main.o Util.o -o out
 
 main.o: main.cpp
 	g++ -c main.cpp
 
 Game.o: Game.cpp Game.h
 	g++ -c Game.cpp 
-
-Node.o: Node.cpp Node.h
-	g++ -c Node.cpp
-
-Tree.o: Tree.cpp Tree.h
-	g++ -c Tree.cpp
 
 Util.o: Util.cpp Util.h
 	g++ -c Util.cpp

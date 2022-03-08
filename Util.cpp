@@ -20,6 +20,48 @@ void Util::convert_to_array(vector<vector<int>> &inMatrix, vector<int> &outArray
     }
 }
 
+void Util::print_path(string &path, int &depth)
+{
+    int pos = 0;
+    for (int curDepth = 0; curDepth <= depth; curDepth++)
+    {
+        for (int row = 0; row < WIDTH; row++)
+        {
+            for (int col = 0; col < WIDTH; col++)
+            {
+                if (isdigit(path[pos]) && isdigit(path[pos + 1]))
+                {
+                    cout << path[pos] << path[pos + 1] << ' ';
+                    pos += 2;
+                }
+                else if (isdigit(path[pos]))
+                {
+                    cout << ' ' << path[pos] << ' ';
+                    pos++;
+                }
+                else
+                {
+                    pos++;
+                    col--;
+                }
+            }
+            cout << '\n';
+        }
+        cout << "============\n";
+    }
+}
+
+void Util::UpdatePath(vector<vector<int>> &inMatrix, string &outPath)
+{
+    for (int row = 0; row < WIDTH; row++)
+    {
+        for (int col = 0; col < WIDTH; col++)
+        {
+            outPath += to_string(inMatrix[row][col]) + ' ';
+        }
+    }
+}
+
 int Util::count_transpositions(Game &initialState, Game &finalState)
 { // isto corre em n^2 (talvez dê para fazer melhor..)
     // a lógica é contar o número de swaps que têm de ser feitos (temos de pensar porque é que isto funciona (se funcionar))

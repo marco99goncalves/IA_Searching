@@ -3,6 +3,7 @@
 #include "Game.h"
 
 using namespace std;
+#define WIDTH 4
 
 namespace Util
 {
@@ -16,4 +17,9 @@ namespace Util
     bool check_solvability(Game &initialState, Game &finalState);
 
     int count_transpositions(Game &initialState, Game &finalState);
+
+    void UpdatePath(vector<vector<int>> &inMatrix, string &outPath);
+
+    void print_path(string &path, int &depth);
+
 }
