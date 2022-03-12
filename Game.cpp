@@ -9,10 +9,22 @@ static vector<pair<int, int>> directions = {make_pair(-1, 0), make_pair(1, 0), m
 pair<int, int> blankPosition;
 int depth;
 string path;
+static int nodeCount = 0;
+
+Game::~Game()
+{
+    nodeCount--;
+}
+
+void Game::PrintCount()
+{
+    cout << nodeCount << "\n";
+}
 
 // Creates a new game
 Game::Game()
 {
+    nodeCount++;
     depth = 0;
     path = "";
     mat.resize(WIDTH);
@@ -29,17 +41,19 @@ Game::Game()
     }
 }
 
-Game::Game(vector<vector<int>> &mat, pair<int, int> &blankPosition, string &path, int depth)
+Game::Game(vector<vector<int>> mat, pair<int, int> blankPosition, int depth)
 {
+    // cout << "crianaç\n";
+    nodeCount++;
     this->mat = mat;
     this->blankPosition = blankPosition;
-    this->path = path;
+    this->path = Util::MatrixToString(mat);
     this->depth = depth;
 }
 
-void Game::CreateChildren(vector<Game *> &outGames)
+vector<Game> Game::CreateChildren()
 {
-
+    vector<Game> games;
     for (auto x : directions)
     {
         if (x.first + blankPosition.first > 3 || x.first + blankPosition.first < 0)
@@ -51,10 +65,10 @@ void Game::CreateChildren(vector<Game *> &outGames)
         swap(matTemp[x.first + blankPosition.first][x.second + blankPosition.second], matTemp[blankPosition.first][blankPosition.second]);
 
         pair<int, int> newGameBlankPosition = make_pair(x.first + blankPosition.first, x.second + blankPosition.second);
-        string newGamePath = path;
-        Util::UpdatePath(matTemp, newGamePath);
-        outGames.push_back(new Game(matTemp, newGameBlankPosition, newGamePath, depth + 1));
+        Game g = Game(matTemp, newGameBlankPosition, depth + 1);
+        games.push_back(g);
     }
+    return games;
 }
 
 void Game::PrintGame()

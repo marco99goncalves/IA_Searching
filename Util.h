@@ -18,7 +18,7 @@ namespace Util
 
     int count_transpositions(Game &initialState, Game &finalState);
 
-    void UpdatePath(vector<vector<int>> &inMatrix, string &outPath);
+    string MatrixToString(vector<vector<int>> &inMatrix);
 
     void print_path(string &path, int &depth);
 

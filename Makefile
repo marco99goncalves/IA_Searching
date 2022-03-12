@@ -1,5 +1,5 @@
 output: main.o Game.o Util.o
-	g++ Game.o main.o Util.o -o out
+	g++ Game.o main.o Util.o -Wall -o out
 
 main.o: main.cpp
 	g++ -c main.cpp

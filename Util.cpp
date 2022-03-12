@@ -20,6 +20,20 @@ void Util::convert_to_array(vector<vector<int>> &inMatrix, vector<int> &outArray
     }
 }
 
+// Converts a matrix into a string
+string Util::MatrixToString(vector<vector<int>> &inMatrix)
+{
+    string result = "";
+    for (int row = 0; row < WIDTH; row++)
+    {
+        for (int col = 0; col < WIDTH; col++)
+        {
+            result += to_string(inMatrix[row][col]) + ' ';
+        }
+    }
+    return result;
+}
+
 void Util::print_path(string &path, int &depth)
 {
     int pos = 0;
@@ -48,17 +62,6 @@ void Util::print_path(string &path, int &depth)
             cout << '\n';
         }
         cout << "============\n";
-    }
-}
-
-void Util::UpdatePath(vector<vector<int>> &inMatrix, string &outPath)
-{
-    for (int row = 0; row < WIDTH; row++)
-    {
-        for (int col = 0; col < WIDTH; col++)
-        {
-            outPath += to_string(inMatrix[row][col]) + ' ';
-        }
     }
 }
 

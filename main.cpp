@@ -7,98 +7,93 @@ using namespace std;
 // g++ -Wall -o main main.cpp && ./main
 Game initial;
 Game final;
-unordered_set<string> visited;
 
-bool is_visited(string &path)
+void PrintSolution(stack<Game> visitedStack, int nodes)
 {
-    return !(visited.insert(path).second);
-}
-
-// Implementaçao de BFS iterativa
-void BFS()
-{
-    queue<Game *> iterativeQueue;
-
-    iterativeQueue.push(&initial);
-
-    is_visited(initial.path);
-
-    int count = 1;
-
-    while (iterativeQueue.size())
+    int size = visitedStack.size();
+    int depth = visitedStack.top().depth;
+    while (!visitedStack.empty())
     {
-        count++;
-        Game *currentGame = iterativeQueue.front();
-        iterativeQueue.pop();
-        vector<Game *> games;
-        currentGame->CreateChildren(games);
-        for (Game *child : games)
-        {
-            string curString = "";
-            Util::UpdatePath(child->mat, curString);
-            if (curString == final.path)
-            {
-                cout << "Caminho encontrado\n";
-                child->path += final.path;
-                Util::print_path(child->path, child->depth);
-                cout << "Depth: " << child->depth << '\n';
-                cout << "Explored: " << count << " configurations\n";
-                return;
-            }
-
-            if (!is_visited(curString))
-                iterativeQueue.push(child);
-        }
+        visitedStack.top().PrintGame();
+        visitedStack.pop();
     }
+
+    cout << "Caminho Encontrado!\n";
+    // Do the thing here
+    cout << "Depth: " << depth << '\n';
+    // cout << "Explored: " << nodes << '\n';
+    return;
 }
 
-void DFS()
+bool DFS(int DEPTH)
 {
-    stack<Game *> iterativeStack;
+    stack<Game> iterativeStack;
+    stack<Game> visitedStack;
+    unordered_set<string> visited;
+    int maxDiff = 0;
 
-    iterativeStack.push(&initial);
+    iterativeStack.push(initial);
+    visitedStack.push(initial);
+    int previousDepth = -1;
 
-    is_visited(initial.path);
-
-    int count = 1;
     while (!iterativeStack.empty())
     {
-        count++;
-        Game *currentGame = iterativeStack.top();
+        Game currentGame = iterativeStack.top();
+
         iterativeStack.pop();
-
-        vector<Game *> games;
-        currentGame->CreateChildren(games);
-
-        if (currentGame->depth > 0)
+        if (currentGame.depth <= previousDepth)
         {
-            currentGame->mat.clear();
-            delete currentGame;
+            for (int i = 0; i < previousDepth - currentGame.depth + 1; i++)
+            {
+                // TODO: Apagar o node
+                visited.erase(visitedStack.top().path);
+                visitedStack.pop();
+            }
         }
 
-        for (Game *child : games)
+        visited.insert(currentGame.path);
+        visitedStack.push(currentGame);
+
+        previousDepth = currentGame.depth;
+
+        vector<Game> games;
+
+        cout << "Depth: " << currentGame.depth << "\n";
+        cout << "HashSet Size: " << visited.size() << "\n";
+
+        if (currentGame.depth < DEPTH)
+            games = currentGame.CreateChildren();
+        else
+            return false;
+
+        for (Game child : games)
         {
-            string curString = "";
-            Util::UpdatePath(child->mat, curString);
-            if (curString == final.path)
+            if (visited.find(child.path) != visited.end())
             {
-                cout << "Caminho encontrado\n";
-                child->path += final.path;
-                Util::print_path(child->path, child->depth);
-                cout << "Depth: " << child->depth << '\n';
-                cout << "Explored: " << count << " configurations\n";
-                return;
+                continue;
             }
 
-            if (!is_visited(curString))
-                iterativeStack.push(child);
-        }
-        visited.erase(currentGame->path);
-    }
-}
+            if (child.path == final.path)
+            {
+                visited.clear();
 
+                iterativeStack.empty();
+                visitedStack.push(child);
+                PrintSolution(visitedStack, 3);
+                return true;
+            }
+            iterativeStack.push(child);
+        }
+    }
+
+    return false;
+}
 int main()
 {
-    DFS();
+    DFS(1000000);
+    // initial.PrintCount();
+    // Game g = Game(initial.mat, initial.blankPosition, 1);
+    // initial.PrintCount();
+
     return 0;
 }
