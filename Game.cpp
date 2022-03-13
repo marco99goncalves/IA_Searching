@@ -1,30 +1,18 @@
-#include <bits/stdc++.h>
 #include "Game.h"
 #include "Util.h"
 using namespace std;
 
-vector<vector<int>> mat(WIDTH, vector<int>(WIDTH));
-static vector<pair<int, int>> directions = {make_pair(-1, 0), make_pair(1, 0), make_pair(0, 1), make_pair(0, -1)};
+vector<vector<unsigned char>> mat;
+static vector<pair<signed char, signed char>> directions = {make_pair(-1, 0), make_pair(1, 0), make_pair(0, 1), make_pair(0, -1)};
 
-pair<int, int> blankPosition;
+pair<unsigned char, unsigned char> blankPosition;
 int depth;
 string path;
 static int nodeCount = 0;
 
-Game::~Game()
-{
-    nodeCount--;
-}
-
-void Game::PrintCount()
-{
-    cout << nodeCount << "\n";
-}
-
 // Creates a new game
 Game::Game()
 {
-    nodeCount++;
     depth = 0;
     path = "";
     mat.resize(WIDTH);
@@ -33,7 +21,7 @@ Game::Game()
         mat[row].resize(WIDTH);
         for (int col = 0; col < WIDTH; col++)
         {
-            cin >> mat[row][col];
+            scanf("%hhu", &mat[row][col]);
             path += to_string(mat[row][col]) + ' ';
             if (mat[row][col] == 0)
                 blankPosition = make_pair(row, col);
@@ -41,10 +29,8 @@ Game::Game()
     }
 }
 
-Game::Game(vector<vector<int>> mat, pair<int, int> blankPosition, int depth)
+Game::Game(vector<vector<unsigned char>> mat, pair<unsigned char, unsigned char> blankPosition, int depth)
 {
-    // cout << "crianaç\n";
-    nodeCount++;
     this->mat = mat;
     this->blankPosition = blankPosition;
     this->path = Util::MatrixToString(mat);
@@ -61,7 +47,7 @@ vector<Game> Game::CreateChildren()
         if (x.second + blankPosition.second > 3 || x.second + blankPosition.second < 0)
             continue;
 
-        vector<vector<int>> matTemp = mat;
+        vector<vector<unsigned char>> matTemp = mat;
         swap(matTemp[x.first + blankPosition.first][x.second + blankPosition.second], matTemp[blankPosition.first][blankPosition.second]);
 
         pair<int, int> newGameBlankPosition = make_pair(x.first + blankPosition.first, x.second + blankPosition.second);
@@ -79,11 +65,11 @@ void Game::PrintGame()
         {
             if (mat[row][col] < 10)
             {
-                cout << ' ' << mat[row][col] << ' ';
+                cout << ' ' << static_cast<int>(mat[row][col]) << ' ';
             }
             else
             {
-                cout << mat[row][col] << ' ';
+                cout << static_cast<int>(mat[row][col]) << ' ';
             }
         }
 

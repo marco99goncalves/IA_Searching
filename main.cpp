@@ -1,6 +1,6 @@
-#include <bits/stdc++.h>
 #include "Game.h"
 #include "Util.h"
+#pragma GCC optimize("Ofast")
 
 using namespace std;
 
@@ -24,13 +24,12 @@ void PrintSolution(stack<Game> visitedStack, int nodes)
     // cout << "Explored: " << nodes << '\n';
     return;
 }
-
+int nodeCount = 0;
 bool DFS(int DEPTH)
 {
     stack<Game> iterativeStack;
     stack<Game> visitedStack;
     unordered_set<string> visited;
-    int maxDiff = 0;
 
     iterativeStack.push(initial);
     visitedStack.push(initial);
@@ -39,13 +38,14 @@ bool DFS(int DEPTH)
     while (!iterativeStack.empty())
     {
         Game currentGame = iterativeStack.top();
-
         iterativeStack.pop();
+
         if (currentGame.depth <= previousDepth)
         {
             for (int i = 0; i < previousDepth - currentGame.depth + 1; i++)
             {
                 // TODO: Apagar o node
+                nodeCount--;
                 visited.erase(visitedStack.top().path);
                 visitedStack.pop();
             }
@@ -58,9 +58,6 @@ bool DFS(int DEPTH)
 
         vector<Game> games;
 
-        cout << "Depth: " << currentGame.depth << "\n";
-        cout << "HashSet Size: " << visited.size() << "\n";
-
         if (currentGame.depth < DEPTH)
             games = currentGame.CreateChildren();
         else
@@ -72,7 +69,7 @@ bool DFS(int DEPTH)
             {
                 continue;
             }
-
+            nodeCount++;
             if (child.path == final.path)
             {
                 visited.clear();
@@ -90,10 +87,13 @@ bool DFS(int DEPTH)
 }
 int main()
 {
+    if (!Util::CheckSolvability(initial, final))
+    {
+        cout << "Impossivel :( \n";
+        return -1;
+    }
+
     DFS(1000000);
-    // initial.PrintCount();
-    // Game g = Game(initial.mat, initial.blankPosition, 1);
-    // initial.PrintCount();
 
     return 0;
 }
